@@ -1,3 +1,4 @@
+// Quelle: https://de.wikibooks.org/wiki/C%2B%2B-Programmierung/_Einf%C3%BChrung_in_C%2B%2B/_Rechnen_(lassen)
 // Rechnen Sie die Ergebnisse der folgenden Aufgaben aus und schreiben sie ein Programm, welches das Gleiche tut.
 // Zahl  = (500 - 100*(2 + 1))*5
 // Zahl  = (Zahl - 700)/3
