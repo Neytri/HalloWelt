@@ -2,18 +2,38 @@
 #include <string>
 #include <list>
 
-std::list<int> tokenize(std::string formel) {
-  std::list<int> tokens;
+struct Token {
+  // -1 = token fehler
+  // 1 = zahl
+  // 2 = plus
+  // 3 = mal
+  int code;
+
+  // zahlenwert, wenn code == 1 (zahl)
+  int number;
+};
+
+std::list<Token> tokenize(std::string formel) {
+  std::list<Token> tokens;
 
   for (char ch: formel) {
     if (ch == '+') {
-      tokens.push_back(2);
+      Token t;
+      t.code = 2;
+      tokens.push_back(t);
     } else if (ch == '*') {
-      tokens.push_back(3);
+      Token t;
+      t.code = 3;
+      tokens.push_back(t);
     } else if (ch >= '0' && ch <= '9') {
-      tokens.push_back(1);
+      Token t;
+      t.code = 1;
+      t.number = (ch - '0');
+      tokens.push_back(t);
     } else {
-      tokens.push_back(-1);
+      Token t;
+      t.code = -1;
+      tokens.push_back(t);
     }
   }
 
@@ -32,11 +52,6 @@ void analyze(std::string formel) {
   }
 }
 
-struct Token {
-  int code;
-  int number; // 42, 1234, 7, ...
-};
-
 int main() {
   std::string formel;
 
@@ -45,11 +60,18 @@ int main() {
 
   std::cout << "Ausgabe: " << formel << '\n';
 
-  //analyze(formel);
-  std::list<int> tokens = tokenize(formel);
+  std::list<Token> tokens = tokenize(formel);
 
-  for (int token : tokens) {
-    std::cout << token << '\n';
+  for (Token token : tokens) {
+    if (token.code == 1) {
+      std::cout << token.number << '\n';
+    } else if (token.code == 2) {
+      std::cout << '+' << '\n';
+    } else if (token.code == 3) {
+      std::cout << '*' << '\n';
+    } else if (token.code == -1) {
+      std::cout << "Token-fehler\n";
+    }
   }
 
   return 0;
