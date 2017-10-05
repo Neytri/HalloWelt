@@ -63,14 +63,19 @@ int main() {
   std::list<Token> tokens = tokenize(formel);
 
   for (Token token : tokens) {
-    if (token.code == 1) {
-      std::cout << token.number << '\n';
-    } else if (token.code == 2) {
-      std::cout << '+' << '\n';
-    } else if (token.code == 3) {
-      std::cout << '*' << '\n';
-    } else if (token.code == -1) {
-      std::cout << "Token-fehler\n";
+    switch (token.code) {
+      case 1:
+        std::cout << token.number << '\n';
+        break;
+      case 2:
+        std::cout << '+' << '\n';
+        break;
+      case 3:
+        std::cout << '*' << '\n';
+        break;
+      default:
+        std::cout << "Token-fehler\n";
+        break;
     }
   }
 
